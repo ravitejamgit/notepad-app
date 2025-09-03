@@ -1,17 +1,23 @@
     import React from "react";
 
-    function NoteInput({note, setNote, handleClear, handleSave}) {
+    function NoteInput({noteData, handleClear, handleSave}) {
 
         return (
             <div>
-                <textarea
-                    value={note}
-                    onChange={(e) => setNote(e.target.value)} 
+                <input
+                    type = "text"
+                    placeholder="Title..."
+                    value={ noteData.noteTitle }
+                    onChange={(e) => noteData.setNoteTitle(e.target.value)}
+                />
+                    <textarea
+                    value={ noteData.noteContent }
+                    onChange={(e) => noteData.setNoteContent(e.target.value)} 
                     placeholder="start typing here.."
                 />
                 <div>
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={handleClear}>Clear</button>
+                    <button onClick={handleSave }>Save</button>
+                    <button onClick={handleClear }>Clear</button>
                 </div>
             </div>
         );

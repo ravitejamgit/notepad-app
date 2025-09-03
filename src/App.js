@@ -1,34 +1,81 @@
 import Header from './components/Header';
 import NoteInput from './components/NoteInput';
 import NotesList from './components/NotesList';
+import ShowSelectedNote from './components/ShowSelectedNote';
 import { useState } from 'react';
 import './App.css';
 
 function App() {
 
-  const [note, setNote] = useState("");
-  const [notes, setNotes] = useState([]);
+  const[noteTitle, setNoteTitle] = useState("");    // Note Title
+  const [noteContent, setNoteContent] = useState("");   // Note Content
+  
+  // notes is an array of objects. Each object is contains {name : "", text : ""}. 
+  const [notes, setNotes] = useState([]); 
 
+  // selectedNote contains which note is selected from a list.
+  const [selectedNote, setSelectedNote] = useState(null);
+
+  const [editNoteId, setEditNoteId] = useState(null);
+
+  // Handles Save button click
   const handleSave = () => {
-    if(note.trim() === "") return;
-    setNotes([...notes, note]);
-    setNote("");
+    if(noteTitle.trim() === "" || noteContent.trim() === "") return;
+
+    if(editNoteId) {
+      setNotes(
+        notes.map((note) => note.id === editNoteId ? {...note, name: noteTitle, content: noteContent} : note)
+      );
+    }
+    else {
+      const newNote = {
+      id : Date.now(),
+      name : noteTitle,
+      content : noteContent
+      };
+
+      setNotes([...notes, newNote]);
+    }
+
+    
+    setNoteTitle("");
+    setNoteContent("");
+    setSelectedNote(null);
   };
 
+  const handleNoteUpdate = (id) => {
+
+    const note = notes.find((n) => n.id === id);
+    if(note) {
+      setNoteTitle(note.name);
+      setNoteContent(note.content);
+      setEditNoteId(note.id);
+    }
+  };
+
+  const handleNoteDelete = (id) => {
+    setNotes(notes.filter((note) =>  note.id !== id )); // Creating a new array with the items that the condition is true(if note.id and arg.id matches, it ignores.)
+    if(selectedNote && selectedNote.id === id) {
+      setSelectedNote(null);
+    }
+  };
+
+  // Handles Clear button click
   const handleClear = () => {
-    setNote("");
+    setNoteTitle("");
+    setNoteContent("");
   };
 
   return (
     <div>
       <Header />
       <NoteInput 
-        note = {note}
-        setNote = {setNote}
+        noteData =  {{noteTitle : noteTitle, noteContent : noteContent, setNoteContent : setNoteContent, setNoteTitle : setNoteTitle}}
         handleClear = {handleClear}
         handleSave = {handleSave}
       />
-      <NotesList notes = {notes}/>
+      <NotesList notes = {notes} setSelectedNote = {setSelectedNote} handleNoteDelete={handleNoteDelete} handleNoteUpdate={handleNoteUpdate}/>
+      <ShowSelectedNote selectedNote = {selectedNote}/>
     </div>
   );
 }
