@@ -2,7 +2,7 @@ import Header from './components/Header';
 import NoteInput from './components/NoteInput';
 import NotesList from './components/NotesList';
 import ShowSelectedNote from './components/ShowSelectedNote';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
@@ -11,12 +11,24 @@ function App() {
   const [noteContent, setNoteContent] = useState("");   // Note Content
   
   // notes is an array of objects. Each object is contains {name : "", text : ""}. 
-  const [notes, setNotes] = useState([]); 
+  const [notes, setNotes] = useState(() => {
+    const savedNotes = localStorage.getItem("notes");
+    return savedNotes ? JSON.parse(savedNotes) : [];
+  }); 
 
   // selectedNote contains which note is selected from a list.
   const [selectedNote, setSelectedNote] = useState(null);
 
   const [editNoteId, setEditNoteId] = useState(null);
+
+  
+
+  // UseEffect for updating local storage when "notes" state changed.
+  useEffect(() => {
+
+    localStorage.setItem("notes", JSON.stringify(notes));
+
+  }, [notes]);
 
   // Handles Save button click
   const handleSave = () => {
