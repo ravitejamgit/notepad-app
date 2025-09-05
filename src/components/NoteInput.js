@@ -3,21 +3,21 @@
     function NoteInput({noteData, handleClear, handleSave}) {
 
         return (
-            <div>
-                <input
-                    type = "text"
-                    placeholder="Title..."
-                    value={ noteData.noteTitle }
-                    onChange={(e) => noteData.setNoteTitle(e.target.value)}
-                />
+            <div className="note-input">
+                    <input
+                        type = "text"
+                        placeholder="Title..."
+                        value={ noteData.noteTitle }
+                        onChange={(e) => noteData.setNoteTitle(e.target.value)}
+                    />
                     <textarea
                     value={ noteData.noteContent }
                     onChange={(e) => noteData.setNoteContent(e.target.value)} 
                     placeholder="start typing here.."
                 />
                 <div>
-                    <button onClick={handleSave }>Save</button>
-                    <button onClick={handleClear }>Clear</button>
+                    <button className = "save" onClick={handleSave }>Save</button>
+                    <button className = "clear" onClick={handleClear }>Clear</button>
                 </div>
             </div>
         );

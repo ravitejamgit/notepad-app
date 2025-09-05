@@ -56,7 +56,8 @@ function App() {
   };
 
   const handleNoteUpdate = (id) => {
-
+    if(selectedNote)
+      setSelectedNote(null);
     const note = notes.find((n) => n.id === id);
     if(note) {
       setNoteTitle(note.name);
@@ -66,10 +67,13 @@ function App() {
   };
 
   const handleNoteDelete = (id) => {
+    if(selectedNote)
+      setSelectedNote(null);
     setNotes(notes.filter((note) =>  note.id !== id )); // Creating a new array with the items that the condition is true(if note.id and arg.id matches, it ignores.)
     if(selectedNote && selectedNote.id === id) {
       setSelectedNote(null);
     }
+    handleClear()
   };
 
   // Handles Clear button click
@@ -81,13 +85,20 @@ function App() {
   return (
     <div>
       <Header />
-      <NoteInput 
-        noteData =  {{noteTitle : noteTitle, noteContent : noteContent, setNoteContent : setNoteContent, setNoteTitle : setNoteTitle}}
-        handleClear = {handleClear}
-        handleSave = {handleSave}
-      />
-      <NotesList notes = {notes} setSelectedNote = {setSelectedNote} handleNoteDelete={handleNoteDelete} handleNoteUpdate={handleNoteUpdate}/>
-      <ShowSelectedNote selectedNote = {selectedNote}/>
+      <div className="main">
+        <NoteInput 
+          noteData =  {{noteTitle : noteTitle, noteContent : noteContent, setNoteContent : setNoteContent, setNoteTitle : setNoteTitle}}
+          handleClear = {handleClear}
+          handleSave = {handleSave}
+        />
+        <NotesList notes = {notes} setSelectedNote = {setSelectedNote} handleNoteDelete={handleNoteDelete} handleNoteUpdate={handleNoteUpdate}/>
+        <ShowSelectedNote 
+          selectedNote = {selectedNote}
+          onclose = {() => setSelectedNote(null)}
+          handleNoteDelete={handleNoteDelete} 
+          handleNoteUpdate={handleNoteUpdate}
+        />
+      </div>
     </div>
   );
 }

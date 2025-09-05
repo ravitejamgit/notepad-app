@@ -2,7 +2,7 @@ import React from "react";
 
 function NotesList({notes, setSelectedNote, handleNoteDelete, handleNoteUpdate}) {
     return (
-        <div>
+        <div className="notes-list">
             <h2>Saved Notes</h2>
             <ul>
                 {notes.map((n) => (
