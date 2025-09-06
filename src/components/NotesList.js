@@ -8,8 +8,10 @@ function NotesList({notes, setSelectedNote, handleNoteDelete, handleNoteUpdate})
                 {notes.map((n) => (
                     <li key = {n.id}>
                         <span onClick={() => setSelectedNote(n)}>{n.name}</span>   
-                        <button onClick={() => handleNoteUpdate(n.id)}>Edit</button>
-                        <button onClick={() => handleNoteDelete(n.id)}>Delete</button>
+                        <div className="button-area">
+                            <button onClick={() => handleNoteUpdate(n.id)}>Edit</button>
+                            <button onClick={() => handleNoteDelete(n.id)}>Delete</button>
+                        </div>
                     </li>
                 ))}
                 

@@ -11,7 +11,7 @@ function ShowSelectedNote({ selectedNote , onclose, handleNoteDelete, handleNote
                 <button className="close-btn" onClick={onclose}>X</button>
                 <h2>{selectedNote.name}</h2>
                 <p>{selectedNote.content}</p>
-                <div className="button-area">
+                <div className="card-button-area">
                      <button className = "editButton" onClick={() => handleNoteUpdate(selectedNote.id)}>Edit</button>
                     <button className = "deleteButton" onClick={() => handleNoteDelete(selectedNote.id)}>Delete</button>
                 </div>
