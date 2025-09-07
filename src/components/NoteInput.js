@@ -5,6 +5,7 @@
         return (
             <div className="note-input">
                     <input
+                        maxLength={50}
                         type = "text"
                         placeholder="Title..."
                         value={ noteData.noteTitle }

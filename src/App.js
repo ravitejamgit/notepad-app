@@ -2,7 +2,7 @@ import Header from './components/Header';
 import NoteInput from './components/NoteInput';
 import NotesList from './components/NotesList';
 import ShowSelectedNote from './components/ShowSelectedNote';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './App.css';
 
 function App() {
@@ -21,6 +21,13 @@ function App() {
 
   const [editNoteId, setEditNoteId] = useState(null);
 
+  const [startRect, setStartRect] = useState(null);
+
+  const handleNoteClick = (e, note) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setStartRect(rect);
+    setSelectedNote(note);
+  };
   
 
   // UseEffect for updating local storage when "notes" state changed.
@@ -91,12 +98,14 @@ function App() {
           handleClear = {handleClear}
           handleSave = {handleSave}
         />
-        <NotesList notes = {notes} setSelectedNote = {setSelectedNote} handleNoteDelete={handleNoteDelete} handleNoteUpdate={handleNoteUpdate}/>
+        <NotesList notes = {notes} setSelectedNote = {setSelectedNote} handleNoteDelete={handleNoteDelete} handleNoteUpdate={handleNoteUpdate} 
+          handleNoteClick = { handleNoteClick }/>
         <ShowSelectedNote 
           selectedNote = {selectedNote}
           onclose = {() => setSelectedNote(null)}
           handleNoteDelete={handleNoteDelete} 
           handleNoteUpdate={handleNoteUpdate}
+          startRect = {startRect}
         />
       </div>
     </div>
