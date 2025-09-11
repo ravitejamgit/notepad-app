@@ -62,6 +62,10 @@ function App() {
     setSelectedNote(null);
   };
 
+  const refresh = () => {
+    window.location.reload(false);
+  }
+
   const handleNoteUpdate = (id) => {
     if(selectedNote)
       setSelectedNote(null);
@@ -91,7 +95,7 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <Header refresh = { refresh }/>
       <div className="main">
         <NoteInput 
           noteData =  {{noteTitle : noteTitle, noteContent : noteContent, setNoteContent : setNoteContent, setNoteTitle : setNoteTitle}}

@@ -1,9 +1,9 @@
 import React from "react";
 
-function Header() {
+function Header({ refresh }) {
     return (
         <header>
-            <h1>Notepad</h1>
+            <h1 onClick={refresh}>Notepad</h1>
         </header>
     );
 }

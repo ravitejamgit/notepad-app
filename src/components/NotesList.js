@@ -7,9 +7,18 @@ function truncateText(text, limit) {
 }
 
 function NotesList({notes, setSelectedNote, handleNoteDelete, handleNoteUpdate, handleNoteClick}) {
-    return (
+    if(notes.length === 0) {
+        return (
+            <div className="notes-list">
+                <h2>Saved Notes</h2>
+                <span className="empty-list">No saved notes...</span>
+            </div>
+        )
+    }
+    else return (
         <div className="notes-list">
             <h2>Saved Notes</h2>
+            
             <ul>
                 {notes.map((n) => (
                     <li key = {n.id}>
@@ -22,6 +31,7 @@ function NotesList({notes, setSelectedNote, handleNoteDelete, handleNoteUpdate, 
                 ))}
                 
             </ul>
+            
         </div>
     );
 }
