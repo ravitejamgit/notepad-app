@@ -93,6 +93,11 @@ function App() {
     setNoteContent("");
   };
 
+
+  const handleClearAllNotes = () => {
+    setNotes([]);
+  }
+
   return (
     <div>
       <Header refresh = { refresh }/>
@@ -103,7 +108,8 @@ function App() {
           handleSave = {handleSave}
         />
         <NotesList notes = {notes} setSelectedNote = {setSelectedNote} handleNoteDelete={handleNoteDelete} handleNoteUpdate={handleNoteUpdate} 
-          handleNoteClick = { handleNoteClick }/>
+          handleNoteClick = { handleNoteClick }
+          handleClearAllNotes = {handleClearAllNotes}/>
         <ShowSelectedNote 
           selectedNote = {selectedNote}
           onclose = {() => setSelectedNote(null)}

@@ -127,7 +127,23 @@ header{
   cursor: pointer;
 }
 
-.notes-list button {
+.notes-list-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.notes-list-header-button {
+  margin-top: 22px;
+  width: 45px;
+  height: 27px;
+  border: none;
+  background-color: #2e42db;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.notes-list-button {
   margin-left: 5px;
   padding: 5px 10px;
   border: none;

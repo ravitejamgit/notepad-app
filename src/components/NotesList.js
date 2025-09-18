@@ -6,7 +6,7 @@ function truncateText(text, limit) {
     return text.slice(0, limit) + "...";
 }
 
-function NotesList({notes, setSelectedNote, handleNoteDelete, handleNoteUpdate, handleNoteClick}) {
+function NotesList({notes, setSelectedNote, handleNoteDelete, handleNoteUpdate, handleNoteClick, handleClearAllNotes}) {
     if(notes.length === 0) {
         return (
             <div className="notes-list">
@@ -17,15 +17,17 @@ function NotesList({notes, setSelectedNote, handleNoteDelete, handleNoteUpdate, 
     }
     else return (
         <div className="notes-list">
-            <h2>Saved Notes</h2>
-            
+            <div className="notes-list-header">
+                <h2>Saved Notes</h2>
+                <button onClick={handleClearAllNotes} className="notes-list-header-button">Clear</button>
+            </div>
             <ul>
                 {notes.map((n) => (
                     <li key = {n.id}>
                         <span onClick={(e) => handleNoteClick(e, n)}>{truncateText(n.name, 13)}</span>   
                         <div className="button-area">
-                            <button onClick={() => handleNoteUpdate(n.id)}>Edit</button>
-                            <button onClick={() => handleNoteDelete(n.id)}>Delete</button>
+                            <button className="notes-list-button" onClick={() => handleNoteUpdate(n.id)}>Edit</button>
+                            <button className="notes-list-button" onClick={() => handleNoteDelete(n.id)}>Delete</button>
                         </div>
                     </li>
                 ))}
