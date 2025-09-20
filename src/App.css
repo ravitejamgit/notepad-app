@@ -271,6 +271,7 @@ header{
   border-radius: 5px;
   padding: 8px;
   margin: 15px;
+  word-wrap: break-word;
 }
 
 .card-button-area button {
